@@ -10,34 +10,88 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include <stdio.h>
 #include <stdlib.h>
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str && str[i])
+    if(!str)
+        return (0);
+	while (str[i])
 		i++;
 	return (i);
 }
-char	*ft_strjoin(char *s1, char *s2)
+
+char	*ft_strdup(const char *s1)
 {
-	char	*buffer;
+	char	*str;
 	char	*result;
 
-	if (!s1 || !s2)
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!str)
 		return (NULL);
-	buffer = malloc(ft_strlen((s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if(!buffer)
-		return (NULL);
-	result = buffer;
-	while(*s1)
-		*buffer++ = *s1++;
-	while(*s2)
-		*buffer++ = *s2++;
-	*buffer = '\0';
-	free(s1);
-	return (result); 
+	result = str;
+	while (*s1)
+	{
+		*str = *s1;
+		s1++;
+		str++;
+	}
+	*str = '\0';
+	return (result);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < ft_strlen(s) + 1)
+	{
+		if (*(s + i) == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	return (NULL);
+}
+char *ft_strjoin(char *s1, char *s2) {
+    char *result;
+    char *buffer;
+    int i = 0; // Başlatma
+    int a = 0; // Başlatma
+
+    // Null kontrolü
+    if (!s1 && !s2) return NULL;
+    if (!s1) return ft_strdup(s2); // Sadece s2'yi döndür
+    if (!s2) return ft_strdup(s1); // Sadece s1'i döndür
+
+    // s1'in uzunluğunu hesapla
+    while (s1[i])
+        i++;
+    
+    // s2'nin uzunluğunu hesapla
+    while (s2[a])
+        a++;
+
+    // Bellek tahsis et
+    buffer = malloc(i + a + 1);
+    if (!buffer)
+        return NULL;
+
+    result = buffer; // Sonucu sakla
+
+    // s1'i kopyala
+    while (*s1)
+        *buffer++ = *s1++;
+    
+    // s2'yi kopyala
+    while (*s2)
+        *buffer++ = *s2++;
+    
+    *buffer = '\0'; // Null terminator ekle
+    free(s1);
+    return result; // Sonucu döndür
 }
