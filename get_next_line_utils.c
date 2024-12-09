@@ -6,7 +6,7 @@
 /*   By: husarpka <husarpka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:20:57 by husarpka          #+#    #+#             */
-/*   Updated: 2024/12/08 18:18:35 by husarpka         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:41:46 by husarpka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*buffer;
 	char	*result;
+	char *s3;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -67,12 +68,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	buffer = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if(!buffer)
 		return (NULL);
+	s3 = s1;
 	result = buffer;
 	while(*s1)
 		*buffer++ = *s1++;
 	while(*s2)
 		*buffer++ = *s2++;
 	*buffer = '\0';
-	
+	free(s3);
 	return (result); 
 }
