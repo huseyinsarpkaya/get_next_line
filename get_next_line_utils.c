@@ -6,14 +6,14 @@
 /*   By: husarpka <husarpka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:20:57 by husarpka          #+#    #+#             */
-/*   Updated: 2024/12/09 12:41:46 by husarpka         ###   ########.fr       */
+/*   Updated: 2024/12/12 14:39:34 by husarpka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -24,7 +24,8 @@ size_t	ft_strlen(char *str)
 		i++;
 	return (i);
 }
-char	*ft_strdup(char *str)
+
+char	*ft_strdup(const char *str)
 {
 	char	*buffer;
 	char	*result;
@@ -36,11 +37,10 @@ char	*ft_strdup(char *str)
 	while (*str)
 		*buffer++ = *str++;
 	*buffer = '\0';
-	
 	return (result);
-	
 }
-char	*ft_strchr(char *s, int c)
+
+char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
@@ -53,28 +53,29 @@ char	*ft_strchr(char *s, int c)
 	}
 	return (NULL);
 }
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*buffer;
 	char	*result;
-	char *s3;
+	char	*s3;
 
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return(ft_strdup(s2));
+		return (ft_strdup(s2));
 	if (!s2)
 		return (ft_strdup(s1));
 	buffer = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if(!buffer)
+	if (!buffer)
 		return (NULL);
 	s3 = s1;
 	result = buffer;
-	while(*s1)
+	while (*s1)
 		*buffer++ = *s1++;
-	while(*s2)
+	while (*s2)
 		*buffer++ = *s2++;
 	*buffer = '\0';
-	free(s3);
-	return (result); 
+	free (s3);
+	return (result);
 }
