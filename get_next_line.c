@@ -6,7 +6,7 @@
 /*   By: husarpka <husarpka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:19:42 by husarpka          #+#    #+#             */
-/*   Updated: 2024/12/12 16:39:29 by husarpka         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:58:22 by husarpka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ char	*ft_get_buffer(char *buffer)
 
 	i = 0;
 	a = 0;
-	if(!buffer)
-		return(NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
@@ -33,6 +31,8 @@ char	*ft_get_buffer(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
+	if (!buffer[i])
+		return (free(buffer), NULL);
 	newbuffer = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
 	if (!newbuffer)
 		return (free(buffer),NULL);
@@ -105,7 +105,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		free(buffer);
 		return (NULL);
 	}
 	buffer = ft_get_next(fd, buffer);
@@ -114,10 +113,10 @@ char	*get_next_line(int fd)
 	line = ft_get_line(buffer);
 	if (!line)
 		return (NULL);
+	
 	buffer = ft_get_buffer(buffer);
 	if (!buffer)
-	{
-		
+	{		
 		buffer = NULL;
 		free(buffer);
 	}

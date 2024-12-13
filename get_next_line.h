@@ -6,14 +6,14 @@
 /*   By: husarpka <husarpka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:30:00 by husarpka          #+#    #+#             */
-/*   Updated: 2024/12/12 13:30:21 by husarpka         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:46:19 by husarpka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE 
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif
 # include <stddef.h>
 

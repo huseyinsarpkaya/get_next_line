@@ -6,7 +6,7 @@
 /*   By: husarpka <husarpka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:20:57 by husarpka          #+#    #+#             */
-/*   Updated: 2024/12/12 14:39:34 by husarpka         ###   ########.fr       */
+/*   Updated: 2024/12/12 20:47:41 by husarpka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*buffer;
 	char	*result;
 	char	*s3;
-
+	
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
