@@ -6,14 +6,14 @@
 /*   By: husarpka <husarpka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:20:57 by husarpka          #+#    #+#             */
-/*   Updated: 2024/12/12 20:47:41 by husarpka         ###   ########.fr       */
+/*   Updated: 2024/12/14 18:58:26 by husarpka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdlib.h>
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(char *str)
 {
 	int	i;
 
@@ -25,11 +25,13 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup(char *str)
 {
 	char	*buffer;
 	char	*result;
 
+	if (!str)
+		return (NULL);
 	buffer = malloc(ft_strlen(str) + 1);
 	if (!buffer)
 		return (NULL);
@@ -40,10 +42,12 @@ char	*ft_strdup(const char *str)
 	return (result);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	size_t	i;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	while (i < ft_strlen(s) + 1)
 	{
@@ -59,7 +63,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*buffer;
 	char	*result;
 	char	*s3;
-	
+
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)

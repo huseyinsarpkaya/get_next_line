@@ -6,7 +6,7 @@
 /*   By: husarpka <husarpka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:19:42 by husarpka          #+#    #+#             */
-/*   Updated: 2024/12/13 17:58:22 by husarpka         ###   ########.fr       */
+/*   Updated: 2024/12/14 19:24:41 by husarpka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,48 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char	*ft_get_buffer(char *buffer)
+static char	*ft_get_buffer(char *buffer)
 {
 	int		i;
 	char	*newbuffer;
 	int		a;
 
+	if (!buffer)
+		return (NULL);
 	i = 0;
 	a = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
 		i++;
-	else
-	{
-		free(buffer);
-		return (NULL);
-	}
 	if (!buffer[i])
 		return (free(buffer), NULL);
 	newbuffer = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
 	if (!newbuffer)
-		return (free(buffer),NULL);
+		return (free(buffer), NULL);
 	while (buffer[i] != '\0')
 		newbuffer[a++] = buffer[i++];
 	newbuffer[a] = '\0';
-		free (buffer);
+	free (buffer);
 	return (newbuffer);
 }
 
-char	*ft_get_line(char *buffer)
+static char	*ft_get_line(char *buffer)
 {
 	char	*result;
 	int		i;
 	char	*temp;
 
-	i = 0;
 	if (!buffer)
 		return (NULL);
+	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
 		i++;
 	result = malloc(sizeof(char) * (i + 1));
 	if (!result)
-		return (free(buffer), buffer = NULL, NULL);
+		return (free(buffer), NULL);
 	temp = result;
 	while (*buffer && i > 0)
 	{
@@ -69,7 +66,7 @@ char	*ft_get_line(char *buffer)
 	return (temp);
 }
 
-char	*ft_get_next(int fd, char *buffer)
+static char	*ft_get_next(int fd, char *buffer)
 {
 	char	*temp;
 	ssize_t	bytes_read;
@@ -83,14 +80,11 @@ char	*ft_get_next(int fd, char *buffer)
 		if (bytes_read < 0)
 			return (free(temp), free(buffer), NULL);
 		if (bytes_read == 0)
-			break;
+			break ;
 		temp[bytes_read] = '\0';
 		buffer = ft_strjoin(buffer, temp);
 		if (!buffer)
-		{
-			free(temp);
-			return (NULL);
-		}	
+			return (free(temp), NULL);
 		if (ft_strchr(temp, '\n'))
 			break ;
 	}
@@ -104,21 +98,13 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
 		return (NULL);
-	}
 	buffer = ft_get_next(fd, buffer);
 	if (!buffer)
 		return (NULL);
 	line = ft_get_line(buffer);
 	if (!line)
 		return (NULL);
-	
 	buffer = ft_get_buffer(buffer);
-	if (!buffer)
-	{		
-		buffer = NULL;
-		free(buffer);
-	}
 	return (line);
 }
